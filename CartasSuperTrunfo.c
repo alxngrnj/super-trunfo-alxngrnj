@@ -1,22 +1,45 @@
 #include <stdio.h>
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
-
 int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
+    // declaração de variáveis
+    char estado;
+    char codCarta[4];
+    char cidade[20];
+    unsigned long populacao;
+    double area;
+    double pib;
+    unsigned int pontosTuristicos;
+    double densidadePopulacional;
     
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
+    // Pedido de input do usuário, atribuindo os valores às variáveis
+    printf("\nNOVA CARTA\n\n");
+    printf("Insira o nome da Cidade: ");
+    scanf("%20[^\n]", cidade);
+    printf("Insira a letra maiúscula que representará o Estado, de 'A' até 'H': ");
+    scanf(" %c", &estado);
+    printf("Insira o código da carta: ");
+    scanf(" %s", &codCarta);
+    printf("Insira a população da cidade: ");
+    scanf(" %lu", &populacao);
+    printf("Insira a área em km², separando as casas decimais com '.' em vez de vírgula: ");
+    scanf(" %lf", &area);
+    printf("Insira o PIB, separando os centavos com '.' em vez de vírgula: ");
+    scanf(" %lf", &pib);
+    printf("Insira o número de pontos turísticos da cidade: ");
+    scanf(" %i", &pontosTuristicos);
+
+    // Exibição dos dados da carta de forma estruturada
+    printf("\nNome da Cidade: %s\n", cidade);
+    printf("Estado: %c\n", estado);
+    printf("Código da Carta: %s\n", codCarta);
+    printf("População: %i habitantes\n", populacao);
+    printf("Área: %.2f km²\n", area);
+    printf("PIB: %.2f bilhões de reais\n", pib / 1000000000);
+    printf("PIB per capita: %.2f reais\n", pib / populacao);
+    printf("Densidade populacional: %.2f hab/m²\n", populacao / area);
     
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
+    // TODO
+    // Comparação das cartas e Super Poder
 
     return 0;
 }
