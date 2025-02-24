@@ -114,9 +114,14 @@ int main() {
 
 void compare(double propriedade1, double propriedade2, char *vencedor) 
 {
-    *vencedor = (propriedade1 > propriedade2) 
-    ? '1' 
-    : (propriedade1 < propriedade2) 
-        ? '2'
-        : '-';
+    if (propriedade1 > propriedade2)
+    {
+        *vencedor = '1';
+    } else if (propriedade1 < propriedade2)
+    {
+        *vencedor = '2';
+    } else
+    {
+        *vencedor = 'E';
+    }
 }
