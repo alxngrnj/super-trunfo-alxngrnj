@@ -114,6 +114,8 @@ int main() {
 
 void compare(double propriedade1, double propriedade2, char *vencedor) 
 {
+    // Uso de operadores condicionais para decidir o valor da variável fornecida
+    // através do uso de ponteiros
     if (propriedade1 > propriedade2)
     {
         *vencedor = '1';
