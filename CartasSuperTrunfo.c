@@ -87,7 +87,7 @@ int main() {
         printf("Número de pontos turísticos: %i\n", cartas[indiceCarta].pontosTuristicos);
     }
 
-    // Comparação entre as cartas e apresentação da carta vencedora em cada categoria
+    // Comparação entre as cartas e definição dos vencedores
     compare(cartas[0].populacao, cartas[1].populacao, &maiorPopulacao);
     compare(cartas[0].area, cartas[1].area, &maiorArea);
     compare(cartas[0].pib, cartas[1].pib, &maiorPib);
@@ -97,6 +97,7 @@ int main() {
     
     puts("\nCOMPARAÇÕES\n");
 
+    // Loop para gerar um menu dinâmico que pede ao usuário o parâmetro de comparação
     for (int indiceAtributo = 0; indiceAtributo < 2; indiceAtributo++)
     {
         if (indiceAtributo == 0)
@@ -186,7 +187,7 @@ int main() {
         }
     }
 
-
+    // Avaliação das escolhas do usuário e comparação individual entre os atributos
     for (int indiceComparado = 0; indiceComparado < 2; indiceComparado++)
     {
         switch(atributosEscolhidos[indiceComparado])
@@ -286,10 +287,13 @@ int main() {
         }
     }
 
+    // Apresentação da soma dos atributos de ambas as cartas para comparação
     printf("Carta 1 - %s - Poder total: %.2f\n", cartas[0].cidade, cartas[0].poderTotal);
     printf("Carta 2 - %s - Poder total: %.2f\n\n", cartas[1].cidade, cartas[1].poderTotal);
 
     compare(cartas[0].poderTotal, cartas[1].poderTotal, &maiorPoder);
+
+    // Checagem do vencedor e apresentação do resultado
     if (maiorPoder == 0)
     {
         puts("Resultado: Empate!");
@@ -302,6 +306,8 @@ int main() {
 
 void compare(double propriedade1, double propriedade2, int *vencedor)
 {
+    // Uso de ternário para realizar uma operação que compara os valores das propriedades
+    // para decidir qual será o valor da variável, alterada com o uso de ponteiros
     *vencedor = (propriedade1 > propriedade2) 
     ? 1
     : (propriedade1 < propriedade2) 
