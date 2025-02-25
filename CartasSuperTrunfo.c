@@ -35,22 +35,25 @@ int main() {
     {
         printf("\nCADASTRAR CARTA %i\n\n", indiceCarta + 1);
         printf("Insira o nome da Cidade: ");
+        // Leitura de até 20 caracteres ou até encontrar um comando \n
         scanf(" %20[^\n]", cartas[indiceCarta].cidade);
-        do 
+        do
         {
             printf("Insira a letra maiúscula que representará o Estado, de 'A' até 'H': ");
             scanf(" %c", &cartas[indiceCarta].estado);
             cartas[indiceCarta].codCarta[0] = cartas[indiceCarta].estado;
             cartas[indiceCarta].codCarta[1] = '0';
-        } 
-        while (cartas[indiceCarta].estado < 'A' || cartas[indiceCarta].estado > 'H');
+        }
+        while (cartas[indiceCarta].estado < 'A'
+            || cartas[indiceCarta].estado > 'H');
+        // Verificação se o número da cidade não foi utilizado pela primeira carta
         if (indiceCarta > 0) {
             do
             {
                 printf("Insira o número da cidade, de '1' a '4': ");
                 scanf(" %c", &cartas[indiceCarta].codCarta[2]);
             }
-            while (cartas[indiceCarta].codCarta[2] > '4' 
+            while (cartas[indiceCarta].codCarta[2] > '4'
                 || cartas[indiceCarta].codCarta[2] < '1'
                 ||  strcmp(cartas[0].codCarta, cartas[1].codCarta) == 0);
         } else {
@@ -59,17 +62,48 @@ int main() {
                 printf("Insira o número da cidade, de '1' a '4': ");
                 scanf(" %c", &cartas[indiceCarta].codCarta[2]);
             }
-            while (cartas[indiceCarta].codCarta[2] > '4' 
+            while (cartas[indiceCarta].codCarta[2] > '4'
                 || cartas[indiceCarta].codCarta[2] < '1');
-        }
-        printf("Insira a população da cidade: ");
-        scanf(" %lu", &cartas[indiceCarta].populacao);
-        printf("Insira a área em km², separando as casas decimais com '.' em vez de vírgula: ");
-        scanf(" %f", &cartas[indiceCarta].area);
-        printf("Insira o PIB, separando os centavos com '.' em vez de vírgula: ");
-        scanf(" %lf", &cartas[indiceCarta].pib);
-        printf("Insira o número de pontos turísticos da cidade: ");
-        scanf(" %i", &cartas[indiceCarta].pontosTuristicos);
+        };
+        // Loop contínuo criado com uma condição que se encerra manualmente quando scanf tem sucesso ao guardar o input na variável
+        while (1)
+        {
+            printf("Insira a população da cidade: ");
+            if (scanf(" %lu", &cartas[indiceCarta].populacao) == 1)
+            {
+                break;
+            }
+            while (getchar() != '\n');
+        };
+        // Mesma lógica de validação aplicada aos outros campos
+        while (1)
+        {
+            printf("Insira a área em km², separando as casas decimais com '.' em vez de vírgula: ");
+            if (scanf(" %f", &cartas[indiceCarta].area) == 1)
+            {
+                break;
+            }
+            while (getchar() != '\n');
+        };
+        while (1)
+        {
+            printf("Insira o PIB, separando os centavos com '.' em vez de vírgula: ");
+            if (scanf(" %lf", &cartas[indiceCarta].pib) == 1)
+            {
+                break;
+            }
+            while (getchar() != '\n');
+        };
+        while (1)
+        {
+            printf("Insira o número de pontos turísticos da cidade: ");
+            if (scanf(" %hu", &cartas[indiceCarta].pontosTuristicos) == 1)
+            {
+                break;
+            }
+            while (getchar() != '\n');
+        };
+        // Campos extras sendo calculados com as informações inseridas
         cartas[indiceCarta].pibPerCapita = cartas[indiceCarta].pib / cartas[indiceCarta].populacao;
         cartas[indiceCarta].densidadePopulacional = cartas[indiceCarta].populacao / cartas[indiceCarta].area;
         cartas[indiceCarta].poderTotal = 0;
@@ -102,84 +136,155 @@ int main() {
     {
         if (indiceAtributo == 0)
         {
-            puts("Digite 1 para comparar os valores de População");
-            puts("Digite 2 para comparar os valores de Área");
-            puts("Digite 3 para comparar os valores de PIB");
-            puts("Digite 4 para comparar os valores de PIB per Capita");
-            puts("Digite 5 para comparar os valores de Densidade Populacional");
-            puts("Digite 6 para comparar os valores de Pontos Turísticos");
-            printf("Sua escolha: ");
-            scanf("%i", &atributosEscolhidos[0]);
+            while (1)
+            {
+                puts("Digite 1 para comparar os valores de População");
+                puts("Digite 2 para comparar os valores de Área");
+                puts("Digite 3 para comparar os valores de PIB");
+                puts("Digite 4 para comparar os valores de PIB per Capita");
+                puts("Digite 5 para comparar os valores de Densidade Populacional");
+                puts("Digite 6 para comparar os valores de Pontos Turísticos");
+                printf("Sua escolha: ");
+                // Validação do dígito inserido
+                if (scanf("%i", &atributosEscolhidos[0]) == 1
+                    && atributosEscolhidos[0] > 0
+                    && atributosEscolhidos[0] < 7)
+                {
+                    break;
+                }
+                printf("\n");
+                while (getchar() != '\n');
+            }
         }
         else
         {
             switch(atributosEscolhidos[0])
             {
                 case 1:
-                    puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
-                    puts("Digite 2 para comparar os valores de Área");
-                    puts("Digite 3 para comparar os valores de PIB");
-                    puts("Digite 4 para comparar os valores de PIB per Capita");
-                    puts("Digite 5 para comparar os valores de Densidade Populacional");
-                    puts("Digite 6 para comparar os valores de Pontos Turísticos");
-                    printf("Sua escolha: ");
-                    scanf("%i", &atributosEscolhidos[1]);
-                    printf("\n");
+                    while (1)
+                    {
+                        puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
+                        puts("Digite 2 para comparar os valores de Área");
+                        puts("Digite 3 para comparar os valores de PIB");
+                        puts("Digite 4 para comparar os valores de PIB per Capita");
+                        puts("Digite 5 para comparar os valores de Densidade Populacional");
+                        puts("Digite 6 para comparar os valores de Pontos Turísticos");
+                        printf("Sua escolha: ");
+                        if (scanf("%i", &atributosEscolhidos[1]) == 1
+                            && atributosEscolhidos[1] >= 0
+                            && atributosEscolhidos[1] < 7
+                            && atributosEscolhidos[1] != 1)
+                        {
+                            printf("\n");
+                            break;
+                        }
+                        while (getchar() != '\n');
+                    }
                     break;
                 case 2:
-                    puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
-                    puts("Digite 1 para comparar os valores de População");
-                    puts("Digite 3 para comparar os valores de PIB");
-                    puts("Digite 4 para comparar os valores de PIB per Capita");
-                    puts("Digite 5 para comparar os valores de Densidade Populacional");
-                    puts("Digite 6 para comparar os valores de Pontos Turísticos");
-                    printf("Sua escolha: ");
-                    scanf("%i", &atributosEscolhidos[1]);
-                    printf("\n");
+                    while (1)
+                    {
+                        puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
+                        puts("Digite 1 para comparar os valores de População");
+                        puts("Digite 3 para comparar os valores de PIB");
+                        puts("Digite 4 para comparar os valores de PIB per Capita");
+                        puts("Digite 5 para comparar os valores de Densidade Populacional");
+                        puts("Digite 6 para comparar os valores de Pontos Turísticos");
+                        printf("Sua escolha: ");
+                        if (scanf("%i", &atributosEscolhidos[1]) == 1
+                            && atributosEscolhidos[1] >= 0
+                            && atributosEscolhidos[1] < 7
+                            && atributosEscolhidos[1] != 2)
+                        {
+                            printf("\n");
+                            break;
+                        }
+                        while (getchar() != '\n');
+                    }
                     break;
                 case 3:
-                    puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
-                    puts("Digite 1 para comparar os valores de População");
-                    puts("Digite 2 para comparar os valores de Área");
-                    puts("Digite 4 para comparar os valores de PIB per Capita");
-                    puts("Digite 5 para comparar os valores de Densidade Populacional");
-                    puts("Digite 6 para comparar os valores de Pontos Turísticos");
-                    printf("Sua escolha: ");
-                    scanf("%i", &atributosEscolhidos[1]);
-                    printf("\n");
+                    while (1)
+                    {
+                        puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
+                        puts("Digite 1 para comparar os valores de População");
+                        puts("Digite 2 para comparar os valores de Área");
+                        puts("Digite 4 para comparar os valores de PIB per Capita");
+                        puts("Digite 5 para comparar os valores de Densidade Populacional");
+                        puts("Digite 6 para comparar os valores de Pontos Turísticos");
+                        printf("Sua escolha: ");
+                        if (scanf("%i", &atributosEscolhidos[1]) == 1
+                            && atributosEscolhidos[1] >= 0
+                            && atributosEscolhidos[1] < 7
+                            && atributosEscolhidos[1] != 3)
+                        {
+                            printf("\n");
+                            break;
+                        }
+                        while (getchar() != '\n');
+                    }
                     break;
                 case 4:
-                    puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
-                    puts("Digite 1 para comparar os valores de População");
-                    puts("Digite 2 para comparar os valores de Área");
-                    puts("Digite 3 para comparar os valores de PIB");
-                    puts("Digite 5 para comparar os valores de Densidade Populacional");
-                    puts("Digite 6 para comparar os valores de Pontos Turísticos");
-                    printf("Sua escolha: ");
-                    scanf("%i", &atributosEscolhidos[1]);
-                    printf("\n");
+                    while (1)
+                    {
+                        puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
+                        puts("Digite 1 para comparar os valores de População");
+                        puts("Digite 2 para comparar os valores de Área");
+                        puts("Digite 3 para comparar os valores de PIB");
+                        puts("Digite 5 para comparar os valores de Densidade Populacional");
+                        puts("Digite 6 para comparar os valores de Pontos Turísticos");
+                        printf("Sua escolha: ");
+                        if (scanf("%i", &atributosEscolhidos[1]) == 1
+                            && atributosEscolhidos[1] >= 0
+                            && atributosEscolhidos[1] < 7
+                            && atributosEscolhidos[1] != 4)
+                        {
+                            printf("\n");
+                            break;
+                        }
+                        while (getchar() != '\n');
+                    }
                     break;
                 case 5:
-                    puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
-                    puts("Digite 1 para comparar os valores de População");
-                    puts("Digite 2 para comparar os valores de Área");
-                    puts("Digite 3 para comparar os valores de PIB");
-                    puts("Digite 4 para comparar os valores de PIB per Capita");
-                    puts("Digite 6 para comparar os valores de Pontos Turísticos");
-                    printf("Sua escolha: ");
-                    scanf("%i", &atributosEscolhidos[1]);
-                    printf("\n");
+                    while (1)
+                    {
+                        puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
+                        puts("Digite 1 para comparar os valores de População");
+                        puts("Digite 2 para comparar os valores de Área");
+                        puts("Digite 3 para comparar os valores de PIB");
+                        puts("Digite 4 para comparar os valores de PIB per Capita");
+                        puts("Digite 6 para comparar os valores de Pontos Turísticos");
+                        printf("Sua escolha: ");
+                        if (scanf("%i", &atributosEscolhidos[1]) == 1
+                            && atributosEscolhidos[1] >= 0
+                            && atributosEscolhidos[1] < 7
+                            && atributosEscolhidos[1] != 5)
+                        {
+                            printf("\n");
+                            break;
+                        }
+                        while (getchar() != '\n');
+                    }
                     break;
                 case 6:
-                    puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
-                    puts("Digite 1 para comparar os valores de População");
-                    puts("Digite 2 para comparar os valores de Área");
-                    puts("Digite 3 para comparar os valores de PIB");
-                    puts("Digite 4 para comparar os valores de PIB per Capita");
-                    puts("Digite 5 para comparar os valores de Densidade Populacional");
-                    printf("Sua escolha: ");
-                    scanf("%i", &atributosEscolhidos[1]);
-                    printf("\n");
+                    while (1)
+                    {
+                        puts("\nDigite 0 para comparar apenas os valores apenas do atributo inserido anteriormente");
+                        puts("Digite 1 para comparar os valores de População");
+                        puts("Digite 2 para comparar os valores de Área");
+                        puts("Digite 3 para comparar os valores de PIB");
+                        puts("Digite 4 para comparar os valores de PIB per Capita");
+                        puts("Digite 5 para comparar os valores de Densidade Populacional");
+                        printf("Sua escolha: ");
+                        if (scanf("%i", &atributosEscolhidos[1]) == 1
+                            && atributosEscolhidos[1] >= 0
+                            && atributosEscolhidos[1] < 7
+                            && atributosEscolhidos[1] != 6)
+                        {
+                            printf("\n");
+                            break;
+                        }
+                        while (getchar() != '\n');
+                    }
                     break;
                 default:
                     break;
